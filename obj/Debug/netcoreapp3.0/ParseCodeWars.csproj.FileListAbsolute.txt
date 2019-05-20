@@ -1,0 +1,12 @@
+C:\Users\goobe\source\repos\ParseCodeWars\obj\Debug\netcoreapp3.0\ParseCodeWars.csprojAssemblyReference.cache
+C:\Users\goobe\source\repos\ParseCodeWars\obj\Debug\netcoreapp3.0\ParseCodeWars.csproj.CoreCompileInputs.cache
+C:\Users\goobe\source\repos\ParseCodeWars\obj\Debug\netcoreapp3.0\ParseCodeWars.AssemblyInfoInputs.cache
+C:\Users\goobe\source\repos\ParseCodeWars\obj\Debug\netcoreapp3.0\ParseCodeWars.AssemblyInfo.cs
+C:\Users\goobe\source\repos\ParseCodeWars\bin\Debug\netcoreapp3.0\ParseCodeWars.exe
+C:\Users\goobe\source\repos\ParseCodeWars\bin\Debug\netcoreapp3.0\ParseCodeWars.deps.json
+C:\Users\goobe\source\repos\ParseCodeWars\bin\Debug\netcoreapp3.0\ParseCodeWars.runtimeconfig.json
+C:\Users\goobe\source\repos\ParseCodeWars\bin\Debug\netcoreapp3.0\ParseCodeWars.runtimeconfig.dev.json
+C:\Users\goobe\source\repos\ParseCodeWars\bin\Debug\netcoreapp3.0\ParseCodeWars.dll
+C:\Users\goobe\source\repos\ParseCodeWars\bin\Debug\netcoreapp3.0\ParseCodeWars.pdb
+C:\Users\goobe\source\repos\ParseCodeWars\obj\Debug\netcoreapp3.0\ParseCodeWars.dll
+C:\Users\goobe\source\repos\ParseCodeWars\obj\Debug\netcoreapp3.0\ParseCodeWars.pdb

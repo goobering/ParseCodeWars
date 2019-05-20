@@ -1,0 +1,1401 @@
+5 kyu
+Tic-Tac-Toe Checker
+C#:
+
+using System;
+
+public class TicTacToe
+{
+  public int IsSolved(int[,] board)
+  {
+      // Check win on rows
+      for(int i = 0; i < board.GetLength(0); i++)
+      {
+          if(((board[i, 0] == board[i, 1]) && (board[i, 0] == board[i, 2])) && board[i, 0] != 0)
+          {
+              return board[i, 0];
+          }
+      }
+
+      // Check win on columns
+      for(int i = 0; i < board.GetLength(1); i++)
+      {
+          if(((board[0, i] == board[1, i]) && (board[0, i] == board[2, i])) && board[0, i] != 0)
+          {
+              return board[0, i];
+          }
+      }
+
+      // Check win on down diagonal
+      if(((board[0, 0] == board[1, 1]) && (board[0, 0] == board[2, 2])) && board[0, 0] != 0)
+      {
+          return board[0, 0];
+      }
+
+      // Check win on up diagonal
+      if(((board[0, 2] == board[1, 1]) && (board[0, 2] == board[2, 0])) && board[0, 2] != 0)
+      {
+          return board[0, 2];
+      }
+
+      // Check incomplete board
+      for(int i = 0; i < board.GetLength(0); i++)
+      {
+          for(int j = 0; j < board.GetLength(1); j++)
+          {
+              if(board[i, j] == 0)
+              {
+                  return -1;
+              };
+          }
+      }
+
+      // Game's a draw
+      return 0;
+  }
+}
+
+    3 weeks ago
+    Refactor
+    Discuss
+
+5 kyu
+Greed is Good
+C#:
+
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+public static class Kata
+{
+  public static int Score(int[] dice) 
+  {
+      var score = 0;
+      var scoreTable = new Dictionary<int, int> {
+          {1, 1000},
+          {6, 600},
+          {5, 500},
+          {4, 400},
+          {3, 300},
+          {2, 200}
+      };
+
+      for(int i = 1; i < 7; i++)
+      {
+          if(dice.Count(d => d == i) >= 3)
+          {
+              score += scoreTable[i];
+
+              for(int j = 0; j < 3; j++)
+              {
+                  dice[Array.IndexOf(dice, i)] = 0;
+              }
+              
+              break;
+          }
+      }
+
+      score += dice.Count(d => d == 1) * 100;
+      score += dice.Count(d => d == 5) * 50;
+
+      return score;
+  }
+}
+
+    1 month ago
+    Refactor
+    Discuss
+
+5 kyu
+Numbers that are a power of their sum of digits
+C#:
+
+using System.Collections.Generic;
+using System;
+
+public class PowerSumDig 
+{
+    public static long PowerSumDigTerm(int n) 
+        {
+          List<long> a = new List<long>();
+           
+          for (int b = 2; b < 400; b++) {
+              long value = b;
+              for (int e = 2; e < 50; e++) {
+                  value *= b;
+          
+                  if (DigitSum(value) == b) {
+                      a.Add(value);            
+                  }
+                  if (a.Count > 50) break;                    
+              }
+              if (a.Count > 50) break;                    
+          }
+
+          a.Sort();
+
+          foreach(var v in a)
+          {
+              Console.WriteLine(v);
+          }
+          return a[n - 1];
+      }
+
+      private static long DigitSum(long n) 
+      {
+          long sum = 0;
+          while (n > 0) {
+              sum += n % 10;
+              n /= 10;
+          }
+
+          return sum;
+      }
+}
+
+    1 month ago
+    Refactor
+    Discuss
+
+5 kyu
+First non-repeating character
+Python:
+
+import collections
+
+def first_non_repeating_letter(string):
+    upperised = string.upper()
+    cnt = collections.Counter(upperised)
+    for char_index, char in enumerate(upperised):
+        if(cnt[char] == 1):
+            return string[char_index]
+    
+    return ''
+
+    5 months ago
+    Refactor
+    Discuss
+
+6 kyu
+IQ Test
+Python:
+
+import collections
+
+def iq_test(numbers):
+    split_nums = numbers.split(' ')
+    even_split_nums = [(int(num) % 2 == 0) for num in split_nums]
+    num_counter = collections.Counter(even_split_nums)
+
+    if(num_counter[True] > num_counter[False]):
+        return even_split_nums.index(False) + 1
+    else:
+        return even_split_nums.index(True) + 1
+
+    6 months ago
+    Refactor
+    Discuss
+
+6 kyu
+Triple trouble
+Python:
+
+import collections
+
+def triple_double(num1, num2):
+    num1_counts = collections.Counter(str(num1))
+    num1_max = num1_counts.most_common(1)[0][0] if num1_counts else None
+
+    if(num1_counts[num1_max] >= 3):
+        num2_counts = collections.Counter(str(num2))
+
+        if(num1_max in num2_counts and num2_counts[num1_max] >= 2):
+            return 1
+        
+    return 0
+
+    6 months ago
+    Refactor
+    Discuss
+
+5 kyu
+Best travel
+Python:
+
+import itertools
+
+def choose_best_sum(t, k, ls):
+        options = itertools.combinations(ls, k)
+        options_summed = map(lambda x: sum(x), options)
+        comp = [x for x in options_summed if (x <= t)]
+        if(len(comp) > 0):
+            return max(comp)
+        
+        return None
+
+    6 months ago
+    Refactor
+    Discuss
+
+6 kyu
+WeIrD StRiNg CaSe
+Python:
+
+def to_weird_case(string):
+    result_list = []
+
+    split_string = string.split()
+    for word_index, word in enumerate(split_string):
+        result_list.append("")
+        for char_index, char in enumerate(word):
+            result_list[word_index] += (char.upper() if char_index % 2 == 0 else char.lower())
+        
+    return ' '.join(result_list)
+
+    6 months ago
+    Refactor
+    Discuss
+
+6 kyu
+Multi-tap Keypad Text Entry on an Old Mobile Phone
+Python:
+
+import string
+
+def presses(phrase):
+        alphabet = list(string.ascii_lowercase)
+        alphabet.append(' ')
+        keynums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#']
+        pattern = [0, 3, 3, 3, 3, 3, 4, 3, 4, 0, 1, 0]
+        layout = []
+        alpha_index = 0
+        
+        for char_count_index, char_count in enumerate(pattern):
+            if(pattern[char_count_index] > 0):
+                var = alphabet[alpha_index:alpha_index + pattern[char_count_index]]
+                layout.append(var)
+                alpha_index += pattern[char_count_index]
+            if(len(layout) >= char_count_index + 1):
+                layout[char_count_index].append(keynums[char_count_index])
+            else:
+                layout.append(keynums[char_count_index])
+
+        phrase = str(phrase).lower()
+        result = 0
+        for char in phrase:
+            for element in layout:
+                if(char in element):
+                    result += element.index(char) + 1
+
+        return result
+
+    6 months ago
+    Refactor
+    Discuss
+
+5 kyu
+Simple Pig Latin
+Python:
+
+def pig_it(text):
+    split_text = text.split()
+    result = []
+
+    for word in split_text:
+        if(word.isalpha()):
+            word += word[0] + 'ay'
+            result.append(word[1:len(word)])
+        else:
+            result.append(word)
+        
+    return ' '.join(result)
+
+    7 months ago
+    Refactor
+    Discuss
+
+6 kyu
+IP Validation
+Python:
+
+def is_valid_IP(strng):
+    if not '.' in strng or strng.count('.') != 3 or '-' in strng:
+        return False
+
+    split_strng = strng.split('.')
+
+    for octet in split_strng:
+        if not octet.isdecimal() or (octet[0] == '0' and len(octet) > 1) or int(octet) < 0 or int(octet) > 255:
+            return False
+
+    return True
+
+    7 months ago
+    Refactor
+    Discuss
+
+7 kyu
+Two fighters, one winner.
+Python:
+
+def declare_winner(fighter1, fighter2, first_attacker):
+    fighter_list = [fighter1, fighter2]
+    first_fighter = next((x for x in fighter_list if x.name == first_attacker), None)
+    first_fighter_index = fighter_list.index(first_fighter)
+
+    while (fighter_list[0].health > 0) and (fighter_list[1].health > 0):
+        if(fighter_list[not first_fighter_index].health > fighter_list[first_fighter_index].damage_per_attack):
+            fighter_list[not first_fighter_index].health -= fighter_list[first_fighter_index].damage_per_attack
+            first_fighter_index = not first_fighter_index
+            continue
+        else:
+            return fighter_list[first_fighter_index].name
+
+    7 months ago
+    Refactor
+    Discuss
+
+6 kyu
+Find The Parity Outlier
+Python:
+
+def find_outlier(integers):
+    valence_sum = 0
+    for x in range(0, 3):
+        valence_sum += integers[x] % 2
+
+    if(valence_sum < 2):
+        return [value for value in integers if value % 2 == 1][0]
+    else:
+        return [value for value in integers if value % 2 == 0][0]
+
+    7 months ago
+    Refactor
+    Discuss
+
+7 kyu
+Don't give me five!
+Python:
+
+def dont_give_me_five(start,end):
+    count = 0
+    for x in range(start, end + 1):
+        if '5' not in str(x):
+            count+= 1
+    return count
+
+    7 months ago
+    Refactor
+    Discuss
+
+7 kyu
+Shortest Word
+Python:
+
+def find_short(s):
+    return len(sorted(s.split(), key=len)[0])
+
+    7 months ago
+    Refactor
+    Discuss
+
+7 kyu
+Number of People in the Bus
+Python:
+
+def number(bus_stops):
+    num_passengers = 0
+    for stop in bus_stops:
+        num_passengers += stop[0]
+        num_passengers -= stop[1]
+        
+    return num_passengers
+
+    7 months ago
+    Refactor
+    Discuss
+
+7 kyu
+Get the Middle Character
+Python:
+
+def get_middle(s):
+    centre = (len(s) // 2)
+    if(len(s) % 2 == 0):
+        centre_slice = slice(centre - 1, centre + 1)
+        return s[centre_slice]
+    
+    return s[centre]
+
+    7 months ago
+    Refactor
+    Discuss
+
+5 kyu
+Battle ships: Sunk damaged or not touched?
+C#:
+
+using System.Collections.Generic;
+using System.Linq;
+using System;
+
+namespace CodeWars
+{
+    public class Kata
+    {
+        public static Dictionary<string, double> damagedOrSunk(int[,] board, int[,] attacks)
+        {
+            double sunk = 0.0;
+            double notTouched = 0.0;
+            double points = 0.0;
+            double damaged = 0.0;
+
+            int[] boats = new int[3] { -1, -1, -1 };
+
+            var castBoard = board.Cast<int>();
+
+            // Max 3 boats on board
+            for(int i = 0; i < 3; i++)
+            {
+                // Count distinct values on board
+                var numBoats = castBoard.Where(x => x.Equals(i + 1)).Count();
+                // If more than 0 of value, add boat tile length to array slot
+                if (numBoats > 0)
+                {
+                    boats[i] = numBoats;
+                }
+            }
+
+            // Copy the boat collection to compare with later
+            var refBoats = (int[])boats.Clone();
+
+            // Loop for number of attacks - 1
+            for(var i = 0; i < attacks.GetLength(0); i++)
+            {
+                // Remap incoming map co-ords to array co-ords
+                var x = board.GetLength(0) - attacks[i, 1]; // X CO-ORD
+                var y = attacks[i, 0] - 1; // Y CO-ORD
+
+                // Get the value hit on the board by the player
+                var hitValue = board[x, y];
+
+                // If the player has hit something...
+                if (hitValue != 0)
+                {
+                    // Subtract 1 from that boat's health
+                    boats[hitValue - 1]--;
+
+                    // If the boat has been sunk...
+                    if(boats[hitValue - 1] == 0)
+                    {
+                        // Add 1 to sunk count
+                        sunk++;
+                    }
+                }
+            }
+
+            var boatCount = 0;
+
+            for(var i = 0; i < boats.Count(); i++)
+            {
+                if((boats[i] != -1))
+                {
+                    boatCount++;
+
+                    if (boats[i].Equals(refBoats[i]))
+                    {
+                        notTouched++;
+                    }
+                }
+            }
+
+            damaged = boatCount - notTouched - sunk;
+
+            points = sunk + (0.5 * damaged) - notTouched;
+
+            return new Dictionary<string, double>()
+            {
+                { "sunk", sunk },
+                { "damaged", damaged},
+                { "notTouched", notTouched },
+                { "points", points }
+            };
+        }
+    }
+}
+
+    8 months ago
+    Refactor
+    Discuss
+
+6 kyu
+Break camelCase
+C#:
+
+using System.Collections.Generic;
+using System.Linq;
+
+public class Kata
+    {
+        public static string BreakCamelCase(string str)
+        {
+            List<int> breaks = new List<int>();
+
+            for(int i = 0; i < str.Length; i++)
+            {
+                if ((int)str[i] > 64 && (int)str[i] < 91)
+                {
+                    breaks.Add(i);
+                }
+            }
+            
+            for(int i = breaks.Count() - 1; i >= 0; i--)
+            {
+                str = str.Insert(breaks[i], " ");
+            }
+
+            return str;
+        }
+    }
+
+    1 year ago
+    Refactor
+    Discuss
+
+6 kyu
+Dubstep
+C#:
+
+using System;
+using System.Linq;
+
+public class Dubstep
+    {
+        public static string SongDecoder(string input)
+        {
+            var dewubbed = input.Replace("WUB", " ");
+            return string.Join(" ", dewubbed.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
+        }
+    }
+
+    1 year ago
+    Refactor
+    Discuss
+
+5 kyu
+Moving Zeros To The End
+C#:
+
+using System.Linq;
+
+public class Kata
+{
+  public static int[] MoveZeroes(int[] arr)
+  {
+      return arr.OrderBy(x => x == 0).ToArray();
+  }
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+6 kyu
+Find the missing term in an Arithmetic Progression
+C#:
+
+using System.Collections.Generic;
+using System.Linq;
+
+public class Kata
+{
+  public static int FindMissing(List<int> list)
+        {
+            var dif = (list.Last() - list.First()) / list.Count();
+            var result = 0;
+
+            for(var i = 0; i < list.Count() - 1; i++)
+            {
+                if(list[i + 1] - dif != list[i])
+                {
+                    result = list[i] + dif;
+                }
+            }
+
+            return result;
+        }
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+6 kyu
+Count the smiley faces!
+C#:
+
+public static class Kata
+{
+  public static int CountSmileys(string[] smileys)
+        {
+            var count = 0;
+
+            foreach(var smile in smileys)
+            {
+                if (smile[0] == ':' || smile[0] == ';')
+                {
+                    if (smile.Length == 2)
+                    {
+                        if(smile[1] == ')' || smile[1] == 'D')
+                        {
+                            count++;
+                        }
+                    }
+                    else if (smile.Length == 3)
+                    {
+                        if ((smile[1] == '-' || smile[1] == '~') && (smile[2] == ')' || smile[2] == 'D'))
+                        {
+                            count++;
+                        }
+                    }
+                }
+                else continue;
+            }
+            return count;
+        }
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+7 kyu
+Is this a triangle?
+C#:
+
+public class Triangle
+{
+    public static bool IsTriangle(int a, int b, int c)
+    {
+      
+        return ((a + b > c) && (a + c > b) && (b + c > a));
+    }
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+7 kyu
+The highest profit wins!
+C#:
+
+using System.Linq;
+
+public class MinMax 
+{
+    public static int[] minMax(int[] lst) 
+    {
+        return new int[]{lst.Min(), lst.Max()};
+    }
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+6 kyu
+Build a pile of Cubes
+C#:
+
+using System;
+
+public class ASum {
+	
+	public static long findNb(long m)
+  {
+      var iteration = 1;
+      long toRemove = 1;
+
+      while(m >= toRemove)
+      {
+          m -= toRemove;
+          iteration++;
+          toRemove = (long)Math.Pow(iteration, 3);
+      }
+
+      return m == 0 ? iteration - 1 : -1;
+  }
+	
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+7 kyu
+Ones and Zeros
+C#:
+
+using System.Linq;
+using System;
+
+namespace Solution
+{
+  class Kata
+    {
+      public static int binaryArrayToNumber(int[] BinaryArray)
+        {
+          var stringed = String.Join(String.Empty, BinaryArray.Select(x => x.ToString()).ToArray());
+          var value = Convert.ToInt32(stringed, 2);
+          return value;
+        }
+    }
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+5 kyu
+RGB To Hex Conversion
+JavaScript:
+
+function rgb(r, g, b){
+    let result = '';
+    let colorArr = [r, g, b];
+    colorArr.forEach(function(element){
+        if(element > 255){
+            element = 255;
+        }
+        if(element < 0){
+            element = 0;
+        }
+        let component = element.toString(16).toUpperCase();
+        if(component.length === 1){
+            component = '0' + component;
+        }
+        result += component;
+    })
+
+    return result;
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+5 kyu
+String incrementer
+JavaScript:
+
+function incrementString(strng){
+        if(isNaN(strng[strng.length - 1])){
+            return strng + '1';
+        }
+
+        let lastNumIndex = strng.length - 1;
+        for(let i = strng.length - 1; i >= 0; i--){
+            if(!isNaN(strng[i])){
+                lastNumIndex = i;
+            }
+        }
+
+        let numLength = 0;
+        if(strng[lastNumIndex] === '0'){
+            numLength = strng.length - (lastNumIndex + 1);
+        }
+
+        let result = strng.slice(0, lastNumIndex);
+        let num = strng.slice(lastNumIndex);        
+        
+        let procNumStr = (parseInt(num) + 1 ).toString();
+
+        if(num[0] === '0'){
+            return result + (procNumStr.toString().padStart(num.length, '0'));
+        } else {
+            return result + procNumStr;
+        }
+    }
+
+    1 year ago
+    Refactor
+    Discuss
+
+6 kyu
+Roman Numerals Encoder
+JavaScript:
+
+function solution(number){
+        let result = '';
+
+        let numerals = [
+            1000,
+            900,
+            500,
+            400,
+            100,
+            90,
+            50,
+            40,
+            10,
+            9,
+            5,
+            4,
+            1
+        ];
+        
+        let translation = {
+            1000: 'M',
+            900: 'CM',
+            500: 'D',
+            400: 'CD',
+            100: 'C',
+            90: 'XC',
+            50: 'L',
+            40: 'XL',
+            10: 'X',
+            9: 'IX',
+            5: 'V',
+            4: 'IV',
+            1: 'I'
+        };
+
+        numerals.forEach(function(numeral){
+            let divided = Math.floor(number / numeral);
+            //console.log(divided);
+            if(divided > 0){
+                for(let i = 0; i < divided; i++){
+                    result += translation[numeral];
+                    number -= numeral;
+                }
+            }
+        });
+
+        return result;
+    }
+
+    1 year ago
+    Refactor
+    Discuss
+
+6 kyu
+Consecutive strings
+JavaScript:
+
+function longestConsec(strarr, k){
+    if(strarr.length === 0 || k > strarr.length || k <= 0){
+        return '';
+    }
+
+    var streak = 0;
+    var longestStreak = '';
+    for(var i = 0; i < strarr.length - k + 1; i++){
+        var candidateBlock = strarr.slice(i, i + k);
+
+        var score = 0;
+        candidateBlock.forEach(function(element){
+            score += element.length;
+        })
+
+        if(score > streak){
+            streak = score;
+            longestStreak = candidateBlock.join('');
+        }
+    }
+
+    return longestStreak;
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+6 kyu
+Build Tower
+JavaScript:
+
+function towerBuilder(nFloors){
+    var maxWidth = 1 + (2 * (nFloors - 1));
+    var output = [];
+    
+    var starCount = ((nFloors - 1) * 2) + 1;
+    for(var i = 0; i < nFloors; i++){
+        var stars = '*'.repeat(starCount - (i*2));
+        var pad = ' '.repeat(i);
+
+        var floor = pad + stars + pad;
+        output.unshift(floor);
+    }
+    console.log(output);
+    return output;
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+6 kyu
+Does my number look big in this?
+JavaScript:
+
+function narcissistic(value){
+    if(value.toString().length === 1){
+        return true;
+    }
+
+    var stringed = value.toString();
+    var power = stringed.length;
+    var sum = 0;
+    for(var i = 0; i < stringed.length; i++){
+        sum += Math.pow(stringed[i], power);
+    }
+    
+    return sum === value ? true : false;
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+5 kyu
+Where my anagrams at?
+JavaScript:
+
+function anagrams(word, words) {
+    var output = [];
+
+    words.forEach(function(currentWord){
+        var wordCopy = currentWord;
+
+        for(var i = 0; i < word.length; i++){
+            var charIndex = wordCopy.indexOf(word[i]);
+
+            if(charIndex !== -1){
+                wordCopy = wordCopy.replace(word[i], '');
+            }
+
+            if(!wordCopy.length){
+                output.push(currentWord);
+            }
+        }
+    });
+    return output;
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+6 kyu
+Take a Number And Sum Its Digits Raised To The Consecutive Powers And ....¡Eureka!!
+JavaScript:
+
+function sumDigPow(a, b){
+    var candidateArray = Array.from(new Array(b + 1 - a), (x,i) => i + a);
+
+    if(b.toString().length === 1){
+        return candidateArray;
+    };
+
+    var output = [];
+
+    candidateArray.forEach(function(element){
+        var stringed = element.toString();
+
+        if(stringed.length === 1){
+            output.push(element);
+        } else {
+            var sumValue = 0;
+
+            for(var i = 0; i < stringed.length; i++){
+                var num = parseInt(stringed[i]);
+                sumValue += Math.pow(num, i + 1);
+            }
+            
+            if(sumValue === element){
+                output.push(element);
+            }
+        }
+    })
+
+    return output;
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+6 kyu
+Split Strings
+JavaScript:
+
+function solution(str){
+  var output = [];
+
+  for(var i = 0; i < str.length; i += 2){
+      output[i / 2] = str.slice(i, i + 2);
+  }
+
+  if(str.length % 2 !== 0){
+      output[output.length - 1] += '_';
+  }
+
+  return output;
+};
+
+    1 year ago
+    Refactor
+    Discuss
+
+7 kyu
+List Filtering
+JavaScript:
+
+function filter_list(l) {
+  return l.filter(function(element){
+    return typeof element !== 'string';
+  });
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+7 kyu
+Growth of a Population
+JavaScript:
+
+function nbYear(p0, percent, aug, p) {
+    var numYears = 0;        
+    
+    while(p0 < p){
+      p0 *= (1 + percent/100);
+      p0 += aug;
+      numYears++;
+    }
+    
+    return numYears;
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+6 kyu
+Unique In Order
+JavaScript:
+
+var uniqueInOrder = function(iterable){
+  var newList = [];
+  
+  for(var i = 0; i < iterable.length; i++){
+    if(iterable[i] !== iterable[i + 1]){
+      newList.push(iterable[i]);
+    };   
+  };
+  
+  return newList;
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+6 kyu
+Array.diff
+JavaScript:
+
+function array_diff(a, b) {
+    return a.filter(function(element){
+        return b.indexOf(element) < 0;
+    })
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+7 kyu
+Remove the minimum
+JavaScript:
+
+function removeSmallest(numbers) {
+    if(numbers.length < 2){ return [] };
+
+    var lowest = Math.min(...numbers);
+    var lowestIndex = numbers.indexOf(lowest);
+    numbers.splice(lowestIndex, 1);
+
+    return numbers;
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+7 kyu
+You're a square!
+JavaScript:
+
+var isSquare = function(n){
+  if(n < 0){
+        return false;;
+    }
+
+    if(Number.isInteger(Math.sqrt(n))){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+7 kyu
+Binary Addition
+JavaScript:
+
+function addBinary(a, b) {
+    return (a + b).toString(2);
+};
+
+    1 year ago
+    Refactor
+    Discuss
+
+6 kyu
+Vasya - Clerk
+JavaScript:
+
+function tickets(peopleInLine){
+    var minBills = [];
+    var medBills = [];
+    var maxBills = [];
+
+    var enoughChange = true;
+
+    peopleInLine.forEach(function(person){
+        if(person === 25){
+            minBills.push(person);
+        }
+        else if(person === 50){
+            if(minBills.length > 0){
+                medBills.push(person);
+                minBills.pop();
+            }
+            else {
+                enoughChange = false;
+                return;
+            }
+        }
+        else if(person === 100){
+            if(medBills.length > 0 && minBills.length > 0){
+                maxBills.push(person);
+                medBills.pop();
+                minBills.pop();
+            }
+            else if(minBills.length > 2){
+                maxBills.push(person);
+                for(var i = 0; i < 3; i++){                    
+                    minBills.pop();
+                }
+            }
+            else {
+                enoughChange = false;
+                return;
+            }
+        }
+    });
+
+    if(enoughChange){
+        return 'YES';
+    }
+    else {
+        return 'NO';
+    };
+};
+
+    1 year ago
+    Refactor
+    Discuss
+
+6 kyu
+Bit Counting
+Java:
+
+public class BitCounting {
+
+	public static int countBits(int n){
+        String converted = Integer.toBinaryString(n);
+        return converted.length() - converted.replace("1", "").length();
+	}
+	
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+6 kyu
+Equal Sides Of An Array
+Java:
+
+public class Kata {
+  public static int findEvenIndex(int[] arr) {
+        for(int i = 0; i < arr.length; i++)
+        {
+            int sumLeft = getSumLeft(arr, i);
+            int sumRight = getSumRight(arr, i);
+            if(sumLeft == sumRight)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int getSumLeft(int[] arr, int index)
+    {
+        int sum = 0;
+        for(int i = 0; i < index; i++)
+        {
+            sum += arr[i];
+        }
+        return sum;
+    }
+
+    public static int getSumRight(int[] arr, int index)
+    {
+        int sum = 0;
+        for(int i = index + 1; i < arr.length; i++)
+        {
+            sum += arr[i];
+        }
+
+        return sum;
+    }
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+6 kyu
+Take a Ten Minute Walk
+Java:
+
+public class TenMinWalk {
+  public static boolean isValid(char[] walk) {
+        int displacement = 0;
+
+        for(char c : walk)
+        {
+            if(c == 'n' || c == 'w')
+            {
+                displacement ++;
+            }
+            else
+            {
+                displacement --;
+            }
+        }
+
+        if(displacement != 0 || walk.length != 10)
+        {
+            return false;
+        }
+        return true;
+    }
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+6 kyu
+Multiples of 3 or 5
+Java:
+
+public class Solution {
+
+  public int solution(int number)
+    {
+        int sum = 0;
+        for(int i = 0; i < number; i++)
+        {
+            if(i % 3 == 0 || i % 5 == 0)
+            {
+                sum += i;
+            }
+        }
+        return sum;
+    }
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+7 kyu
+Breaking chocolate problem
+Java:
+
+public class Chocolate{
+  public static int breakChocolate(int n, int m) {
+    if(n == 0 || m == 0)
+    {
+        return 0;
+    }
+    return ((n - 1) + (n * (m - 1)));
+  }
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+7 kyu
+Mumbling
+Java:
+
+public class Accumul {
+    
+    public static String accum(String s) {
+        char[] charArray = s.toCharArray();
+        StringBuilder builder = new StringBuilder();
+
+        for(int i = 0; i < charArray.length; i++)
+        {
+            builder.append(Character.toUpperCase(charArray[i]));
+            for(int j = 0; j < i ; j++)
+            {
+                builder.append(Character.toLowerCase(charArray[i]));
+            }
+            builder.append('-');
+        }
+        builder.deleteCharAt(builder.length() - 1);
+        return builder.toString();
+    }
+}
+
+    1 year ago
+    Refactor
+    Discuss
+
+8 kyu
+Multiply
+C#:
+
+public class CustomMath {
+    public static int multiply(int a, int b) {
+        return a * b;
+    }
+}
+
+    1 year ago
+    Refactor
